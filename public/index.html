@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Bancário</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Sistema de Gerenciamento Bancário</h1>
+
+    <!-- Seção Agências -->
+    <div class="crud-section">
+        <h2>Agências</h2>
+        <form id="formAgencia">
+            <input type="hidden" id="agenciaIdEdit" value="">
+            <input type="text" id="agenciaNome" placeholder="Nome da Agência" required>
+            <input type="text" id="agenciaCidade" placeholder="Cidade da Agência" required>
+            <input type="number" step="0.01" id="agenciaAtivos" placeholder="Ativos" required>
+            <button type="submit">Salvar Agência</button>
+            <button type="button" id="cancelEditAgencia" class="cancel-btn" style="display:none;">Cancelar Edição</button>
+        </form>
+        <table id="tabelaAgencias">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Cidade</th>
+                    <th>Ativos</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dados das agências serão inseridos aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Seção Clientes -->
+    <div class="crud-section">
+        <h2>Clientes</h2>
+        <form id="formCliente">
+            <input type="hidden" id="clienteIdEdit" value="">
+            <input type="text" id="clienteNome" placeholder="Nome do Cliente" required>
+            <input type="text" id="clienteEndereco" placeholder="Endereço" required>
+            <input type="text" id="clienteCidade" placeholder="Cidade do Cliente" required>
+            <button type="submit">Salvar Cliente</button>
+            <button type="button" id="cancelEditCliente" class="cancel-btn" style="display:none;">Cancelar Edição</button>
+        </form>
+        <table id="tabelaClientes">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Endereço</th>
+                    <th>Cidade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dados dos clientes serão inseridos aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Seção Contas -->
+    <div class="crud-section">
+        <h2>Contas</h2>
+        <form id="formConta">
+            <input type="hidden" id="contaIdEdit" value="">
+            <input type="text" id="contaNumero" placeholder="Número da Conta" required>
+            <select id="contaAgenciaNome" required>
+                <option value="">Selecione uma Agência</option>
+                <!-- Opções de agências carregadas dinamicamente -->
+            </select>
+            <select id="contaClienteNome" required>
+                <option value="">Selecione um Cliente</option>
+                <!-- Opções de clientes carregadas dinamicamente -->
+            </select>
+            <input type="number" step="0.01" id="contaSaldo" placeholder="Saldo" required>
+            <button type="submit">Salvar Conta</button>
+            <button type="button" id="cancelEditConta" class="cancel-btn" style="display:none;">Cancelar Edição</button>
+        </form>
+        <table id="tabelaContas">
+            <thead>
+                <tr>
+                    <th>Número</th>
+                    <th>Agência</th>
+                    <th>Cliente</th>
+                    <th>Saldo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dados das contas serão inseridos aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
