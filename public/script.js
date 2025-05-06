@@ -146,7 +146,7 @@ async function carregarAgencias() {
             tr.innerHTML = `
                 <td>${ag.Agencia_Nome}</td>
                 <td>${ag.Agencia_Cidade}</td>
-                <td>${ag.Ativos.toFixed(2)}</td>
+                <td>${ag.Ativos}</td>
                 <td>
                     <button class="edit-btn" onclick="editarAgencia('${ag.Agencia_Nome}', '${ag.Agencia_Cidade}', ${ag.Ativos})">Editar</button>
                     <button class="delete-btn" onclick="deletarAgencia('${ag.Agencia_Nome}')">Deletar</button>
@@ -263,7 +263,7 @@ async function carregarContas() {
                 <td>${c.Conta_Numero}</td>
                 <td>${c.Agencia_Nome}</td>
                 <td>${c.Cliente_Nome}</td>
-                <td>${c.Saldo.toFixed(2)}</td>
+                <td>${c.Saldo}</td>
                 <td>
                     <button class="edit-btn" onclick="editarConta('${c.Conta_Numero}', '${c.Agencia_Nome}', '${c.Cliente_Nome}', ${c.Saldo})">Editar Saldo</button>
                     <button class="delete-btn" onclick="deletarConta('${c.Conta_Numero}')">Deletar</button>
