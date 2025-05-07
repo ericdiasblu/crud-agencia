@@ -3,96 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD Bancário</title>
+    <title>Sistema Bancário Digital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Sistema de Gerenciamento Bancário</h1>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-landmark"></i>
+                <h1>BankSystem</h1>
+            </div>
+            <p class="tagline">Gestão bancária simplificada</p>
+        </header>
 
-    <!-- Seção Agências -->
-    <div class="crud-section">
-        <h2>Agências</h2>
-        <form id="formAgencia">
-            <input type="hidden" id="agenciaIdEdit" value="">
-            <input type="text" id="agenciaNome" placeholder="Nome da Agência" required>
-            <input type="text" id="agenciaCidade" placeholder="Cidade da Agência" required>
-            <input type="number" step="0.01" id="agenciaAtivos" placeholder="Ativos" required>
-            <button type="submit">Salvar Agência</button>
-            <button type="button" id="cancelEditAgencia" class="cancel-btn" style="display:none;">Cancelar Edição</button>
-        </form>
-        <table id="tabelaAgencias">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Cidade</th>
-                    <th>Ativos</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dados das agências serão inseridos aqui -->
-            </tbody>
-        </table>
-    </div>
+        <nav class="tabs">
+            <button class="tab-btn active" data-target="agencia-section">
+                <i class="fas fa-building"></i> Agências
+            </button>
+            <button class="tab-btn" data-target="cliente-section">
+                <i class="fas fa-users"></i> Clientes
+            </button>
+            <button class="tab-btn" data-target="conta-section">
+                <i class="fas fa-wallet"></i> Contas
+            </button>
+        </nav>
 
-    <!-- Seção Clientes -->
-    <div class="crud-section">
-        <h2>Clientes</h2>
-        <form id="formCliente">
-            <input type="hidden" id="clienteIdEdit" value="">
-            <input type="text" id="clienteNome" placeholder="Nome do Cliente" required>
-            <input type="text" id="clienteEndereco" placeholder="Endereço" required>
-            <input type="text" id="clienteCidade" placeholder="Cidade do Cliente" required>
-            <button type="submit">Salvar Cliente</button>
-            <button type="button" id="cancelEditCliente" class="cancel-btn" style="display:none;">Cancelar Edição</button>
-        </form>
-        <table id="tabelaClientes">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Endereço</th>
-                    <th>Cidade</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dados dos clientes serão inseridos aqui -->
-            </tbody>
-        </table>
-    </div>
+        <main>
+            <!-- Seção Agências -->
+            <section id="agencia-section" class="crud-section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-building"></i> Gerenciar Agências</h2>
+                    <button id="addAgenciaBtn" class="add-btn">
+                        <i class="fas fa-plus"></i> Nova Agência
+                    </button>
+                </div>
 
-    <!-- Seção Contas -->
-    <div class="crud-section">
-        <h2>Contas</h2>
-        <form id="formConta">
-            <input type="hidden" id="contaIdEdit" value="">
-            <input type="text" id="contaNumero" placeholder="Número da Conta" required>
-            <select id="contaAgenciaNome" required>
-                <option value="">Selecione uma Agência</option>
-                <!-- Opções de agências carregadas dinamicamente -->
-            </select>
-            <select id="contaClienteNome" required>
-                <option value="">Selecione um Cliente</option>
-                <!-- Opções de clientes carregadas dinamicamente -->
-            </select>
-            <input type="number" step="0.01" id="contaSaldo" placeholder="Saldo" required>
-            <button type="submit">Salvar Conta</button>
-            <button type="button" id="cancelEditConta" class="cancel-btn" style="display:none;">Cancelar Edição</button>
-        </form>
-        <table id="tabelaContas">
-            <thead>
-                <tr>
-                    <th>Número</th>
-                    <th>Agência</th>
-                    <th>Cliente</th>
-                    <th>Saldo</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dados das contas serão inseridos aqui -->
-            </tbody>
-        </table>
+                <div id="formAgenciaContainer" class="form-container hidden">
+                    <form id="formAgencia" class="data-form">
+                        <div class="form-header">
+                            <h3 id="formAgenciaTitle">Adicionar Agência</h3>
+                            <button type="button" class="close-form-btn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="form-body">
+                            <input type="hidden" id="agenciaIdEdit" value="">
+                            
+                            <div class="form-group">
+                                <label for="agenciaNome">Nome da Agência</label>
+                                <input type="text" id="agenciaNome" placeholder="Digite o nome da agência" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="agenciaCidade">Cidade</label>
+                                <input type="text" id="agenciaCidade" placeholder="Digite a cidade" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="agenciaAtivos">Ativos (R$)</label>
+                                <input type="number" step="0.01" id="agenciaAtivos" placeholder="0.00" required>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="save-btn">
+                                    <i class="fas fa-save"></i> Salvar
+                                </button>
+                                <button type="button" id="cancelEditAgencia" class="cancel-btn">
+                                    <i class="fas fa-ban"></i> Cancelar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchAgencias" placeholder="Buscar agências...">
+                        </div>
+                    </div>
+                    <table id="tabelaAgencias">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Cidade</th>
+                                <th>Ativos</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dados das agências serão inseridos aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Seção Clientes -->
+            <section id="cliente-section" class="crud-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> Gerenciar Clientes</h2>
+                    <button id="addClienteBtn" class="add-btn">
+                        <i class="fas fa-plus"></i> Novo Cliente
+                    </button>
+                </div>
+
+                <div id="formClienteContainer" class="form-container hidden">
+                    <form id="formCliente" class="data-form">
+                        <div class="form-header">
+                            <h3 id="formClienteTitle">Adicionar Cliente</h3>
+                            <button type="button" class="close-form-btn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="form-body">
+                            <input type="hidden" id="clienteIdEdit" value="">
+                            
+                            <div class="form-group">
+                                <label for="clienteNome">Nome Completo</label>
+                                <input type="text" id="clienteNome" placeholder="Digite o nome completo" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="clienteEndereco">Endereço</label>
+                                <input type="text" id="clienteEndereco" placeholder="Digite o endereço completo" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="clienteCidade">Cidade</label>
+                                <input type="text" id="clienteCidade" placeholder="Digite a cidade" required>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="save-btn">
+                                    <i class="fas fa-save"></i> Salvar
+                                </button>
+                                <button type="button" id="cancelEditCliente" class="cancel-btn">
+                                    <i class="fas fa-ban"></i> Cancelar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchClientes" placeholder="Buscar clientes...">
+                        </div>
+                    </div>
+                    <table id="tabelaClientes">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Endereço</th>
+                                <th>Cidade</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dados dos clientes serão inseridos aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Seção Contas -->
+            <section id="conta-section" class="crud-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-wallet"></i> Gerenciar Contas</h2>
+                    <button id="addContaBtn" class="add-btn">
+                        <i class="fas fa-plus"></i> Nova Conta
+                    </button>
+                </div>
+
+                <div id="formContaContainer" class="form-container hidden">
+                    <form id="formConta" class="data-form">
+                        <div class="form-header">
+                            <h3 id="formContaTitle">Adicionar Conta</h3>
+                            <button type="button" class="close-form-btn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="form-body">
+                            <input type="hidden" id="contaIdEdit" value="">
+                            
+                            <div class="form-group">
+                                <label for="contaNumero">Número da Conta</label>
+                                <input type="text" id="contaNumero" placeholder="Digite o número da conta" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contaAgenciaNome">Agência</label>
+                                <select id="contaAgenciaNome" required>
+                                    <option value="">Selecione uma Agência</option>
+                                    <!-- Opções de agências carregadas dinamicamente -->
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contaClienteNome">Cliente</label>
+                                <select id="contaClienteNome" required>
+                                    <option value="">Selecione um Cliente</option>
+                                    <!-- Opções de clientes carregadas dinamicamente -->
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contaSaldo">Saldo Inicial (R$)</label>
+                                <input type="number" step="0.01" id="contaSaldo" placeholder="0.00" required>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="save-btn">
+                                    <i class="fas fa-save"></i> Salvar
+                                </button>
+                                <button type="button" id="cancelEditConta" class="cancel-btn">
+                                    <i class="fas fa-ban"></i> Cancelar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchContas" placeholder="Buscar contas...">
+                        </div>
+                    </div>
+                    <table id="tabelaContas">
+                        <thead>
+                            <tr>
+                                <th>Número</th>
+                                <th>Agência</th>
+                                <th>Cliente</th>
+                                <th>Saldo</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dados das contas serão inseridos aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 BankSystem - Sistema de Gerenciamento Bancário</p>
+        </footer>
     </div>
 
     <script src="script.js"></script>
